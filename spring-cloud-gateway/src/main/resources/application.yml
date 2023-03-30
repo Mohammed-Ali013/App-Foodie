@@ -1,0 +1,59 @@
+
+server:
+  port: 8081
+jwt:
+  secret:
+    key: secret  
+
+spring:
+  application:
+    name: spring-cloud-gateway
+
+
+  cloud:
+    gateway:
+      routes:
+      - id: searchservice
+        uri: lb://searchservice
+        predicates:
+        - Path=/searchservice/**
+        filters:
+            - CustomFilter
+           
+            - RewritePath=/searchservice(?<segment>/?.*), $\{segment}
+
+      - id: favoriteservice
+        uri: lb://favoriteservice
+        predicates:
+        - Path=/favoriteservice/**   
+        filters:
+             #- CustomFilter
+            
+             - RewritePath=/favoriteservice(?<segment>/?.*), $\{segment}
+
+      - id: userservice
+        uri: lb://userservice
+        predicates:
+        - Path=/userservice/**
+        filters:
+            
+            - RewritePath=/userservice(?<segment>/?.*), $\{segment}   
+      globalcors:
+       corsConfigurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods: "*"
+            allowedHeaders: "*"
+            exposedHeaders: "*"
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true 
+    service-url:
+      defaultZone: http://localhost:8761/eureka/   
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

@@ -1,0 +1,14 @@
+server:
+  port: 8083
+  
+spring:
+  application:
+    name: searchservice
+    
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true    
+
+  api:
+    key: 5ffb698e3d9a8ea8d51fb8847c216058

@@ -1,0 +1,8 @@
+#server.port= 8082
+#spring.application.name= favoriteservice
+#eureka.client.registry-with-eureka= true
+#eureka.client.fetch-registry= true
+#spring.data.mongodb.host= localhost
+#spring.data.mongodb.port= 27017
+#spring.data.mongodb.database= foodDB
+
